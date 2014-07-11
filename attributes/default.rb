@@ -29,12 +29,12 @@ default.elasticsearch[:node][:name]    = node.name
 
 # === USER & PATHS
 #
-default.elasticsearch[:dir]       = "/usr/local"
+default.elasticsearch[:dir]       = "/opt/elasticsearch"
 default.elasticsearch[:user]      = "elasticsearch"
 
-default.elasticsearch[:path][:conf] = "/usr/local/etc/elasticsearch"
-default.elasticsearch[:path][:data] = "/usr/local/var/data/elasticsearch"
-default.elasticsearch[:path][:logs] = "/usr/local/var/log/elasticsearch"
+default.elasticsearch[:path][:conf] = "#{node.elasticsearch[:dir]}/etc"
+default.elasticsearch[:path][:data] = "#{node.elasticsearch[:dir]}/data"
+default.elasticsearch[:path][:logs] = "/var/log/elasticsearch"
 
 default.elasticsearch[:pid_path]  = "/usr/local/var/run"
 default.elasticsearch[:pid_file]  = "#{node.elasticsearch[:pid_path]}/#{node.elasticsearch[:node][:name].to_s.gsub(/\W/, '_')}.pid"
@@ -44,7 +44,7 @@ default.elasticsearch[:pid_file]  = "#{node.elasticsearch[:pid_path]}/#{node.ela
 # Maximum amount of memory to use is automatically computed as one half of total available memory on the machine.
 # You may choose to set it in your node/role configuration instead.
 #
-allocated_memory = "#{(node.memory.total.to_i * 0.6 ).floor / 1024}m"
+allocated_memory = "#{(node.memory.total.to_i * 0.8 ).floor / 1024}m"
 default.elasticsearch[:allocated_memory] = allocated_memory
 
 # === GARBAGE COLLECTION SETTINGS
